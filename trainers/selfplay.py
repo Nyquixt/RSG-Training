@@ -6,11 +6,6 @@ import os
 import subprocess
 from subprocess import Popen
 
-# Math pacakages
-import math
-import numpy as np
-import matplotlib.pyplot as plt 
-
 # Aux packages
 import time
 from datetime import timedelta
