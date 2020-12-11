@@ -109,7 +109,7 @@ class AI2GOBotSelfPlay:
             p.wait()
 
     def keep_max_games(self, generation):
-        os.system('rm {}'.format(os.path.join(self.train_folder_path, 'sgf', 'sgf{}*'.format(generation) )) )
+        os.system('rm {}'.format(os.path.join(self.train_folder_path, 'sgf', 'sgf-{}*'.format(generation) )) )
 
     def dump_data(self):
         os.system('cat sgf/*.sgf > train.sgf')
