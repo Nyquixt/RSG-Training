@@ -49,3 +49,4 @@ __pycache__
 records/
 .vscode/
 node_modules/
+package-lock.json
