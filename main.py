@@ -6,7 +6,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--generations', '-g', type=int, default=5, help='Number of generations to be trained')
 parser.add_argument('--train-folder-path', '-t', type=str, default='.', help='Path to folder that stores sgf folder during training')
 parser.add_argument('--random-move', type=int, default=10, help='Starting with x first random moves for first 10 generations. It will decay.')
-parser.add_argument('--visit', type=int, default=50, help='Number of visits.')
+parser.add_argument('--visit', type=int, default=50, help='Number of visits during selfplay.')
+parser.add_argument('--playout', type=int, default=25, help='Number of playouts during validation.')
 parser.add_argument('--random-temp', type=float, default=1.0, help='Parameter for search temparature in MCTS.')
 parser.add_argument('--size', type=int, default=7, help='Board size.')
 parser.add_argument('--komi', type=float, default=8.5, help='Komi.')
@@ -27,6 +28,7 @@ generations = args.generations
 
 random_move = args.random_move
 visit = args.visit
+playout = args.playout
 random_temp = args.random_temp
 
 size = args.size
@@ -46,6 +48,7 @@ AI2GOTrainer = AI2GOBotSelfPlay(
     generations=generations,
     random_move=random_move,
     visit=visit,
+    playout=playout,
     random_temp=random_temp,
     komi=komi,
     board_size=size,
