@@ -13,7 +13,7 @@ import math
 from datetime import timedelta
 
 class AI2GOBotSelfPlay:
-    def __init__(self, train_folder_path, generations, random_move, visit, playout, random_temp, 
+    def __init__(self, train_folder_path, generations, random_move, visit, playout, gate, random_temp, 
                 komi, board_size, net_block, net_filter, step, past_generations, 
                 games_per_gen, num_process):
         self.train_folder_path = train_folder_path # folder that stores the current gen's parsed sgf files
@@ -23,6 +23,7 @@ class AI2GOBotSelfPlay:
         self.random_move = random_move # the engine plays first random_move moves randomly
         self.visit = visit
         self.playout = playout
+        self.gate = gate
         self.random_temp = random_temp
 
         # game parameters
