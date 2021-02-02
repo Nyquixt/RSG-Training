@@ -76,7 +76,7 @@ class AI2GOBotSelfPlay:
         os.system('rm -rf sgf')
         os.system('mkdir sgf')
         with open('progress.txt', 'w') as outfile:
-            outfile.write('1, 0.0') # Generation 0, Elo 0, this is for the main server to read progress
+            outfile.write('1,0.0') # Generation 0, Elo 0, this is for the main server to read progress
 
     def populate_selfplay_commands(self, current_generation):
 
@@ -252,6 +252,10 @@ class AI2GOBotSelfPlay:
             result, winrate = self.calculate_winrate()
 
             if result == True: # pass
+                # Save passed network to models/ folder
+                os.system('cp leelaz-model-{}.txt gen-{}.txt'.format(self.current_checkpoint, generation))
+                os.system('mv gen-{}.txt models/'.format(generation))
+
                 # Set current network to be best best network
                 os.system('rm best-network.txt')
                 os.system('cp leelaz-model-{}.txt best-network.txt'.format(self.current_checkpoint))
@@ -266,15 +270,12 @@ class AI2GOBotSelfPlay:
                 with open('progress.txt', 'w') as outfile:
                     outfile.write('{},{}'.format(generation + 1, self.best_elo)) # current generation + 1, current best elo from current generation
             
-            else: # fail, calculate elo
+            else: # Fail, calculate elo
+                
                 elo_diff = self.calculate_elo_difference(winrate)
                 elo = round(self.best_elo - elo_diff, 2)
                 with open('progress.txt', 'w') as outfile:
                     outfile.write('{},{}'.format(generation + 1, elo)) # current generation + 1, current elo from current generation
-
-            # Save current model to models/ folder
-            os.system('cp leelaz-model-{}.txt gen-{}.txt'.format(self.current_checkpoint, generation))
-            os.system('mv gen-{}.txt models/'.format(generation))
 
             gen_end = time.time()
             # Logging
