@@ -248,7 +248,7 @@ class AI2GOBotSelfPlay:
             self.train_network()
             print("Validate New Network Phase...")
             self.validate_network()
-            result, winrate = self.calculate_wins()
+            result, winrate = self.calculate_winrate()
 
             if result == True: # pass
                 # Set current network to be best best network
