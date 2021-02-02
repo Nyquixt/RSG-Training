@@ -278,6 +278,11 @@ class AI2GOBotSelfPlay:
                     outfile.write('{},{}'.format(generation + 1, elo)) # current generation + 1, current elo from current generation
 
             gen_end = time.time()
+
+            # Remove necessary folders
+            os.system('rm- rf bestvs') # sgf games where best network is black
+            os.system('rm -rf vsbest') # sgf games where current network is black
+
             # Logging
             with open('log.txt', 'a+') as f:
                 f.write('*********************************\n')
