@@ -13,7 +13,7 @@ import math
 from datetime import timedelta
 
 class AI2GOBotSelfPlay:
-    def __init__(self, train_folder_path, generations, random_move, visit, random_temp, 
+    def __init__(self, train_folder_path, generations, random_move, visit, playout, random_temp, 
                 komi, board_size, net_block, net_filter, step, past_generations, 
                 games_per_gen, num_process):
         self.train_folder_path = train_folder_path # folder that stores the current gen's parsed sgf files
@@ -22,6 +22,7 @@ class AI2GOBotSelfPlay:
         self.generations = generations
         self.random_move = random_move # the engine plays first random_move moves randomly
         self.visit = visit
+        self.playout = playout
         self.random_temp = random_temp
 
         # game parameters
@@ -166,7 +167,7 @@ class AI2GOBotSelfPlay:
 
     def train_network(self):
         # Resume training from the best checkpoint
-        os.system('python tf/parse.py {} {} train_data/train.out leelaz-model-{} >> output.txt 2>&1'.format(self.net_block, self.net_filter, self.current_checkpoint)) 
+        os.system('python tf/parse.py {} {} train_data/train.out leelaz-model-{} >> output.txt 2>&1'.format(self.net_block, self.net_filter, self.best_checkpoint)) 
         # remove the data folder
         os.system('rm -rf train_data')
 
