@@ -1,6 +1,3 @@
-# this shell script creates a another directory on the sub level of the current directory
-# after that it will copy all the necessary files, directories needed for training to that new directory
-# ./create.sh folder_name
 #!/bin/bash
 
 mkdir $1
